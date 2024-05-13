@@ -1,25 +1,30 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu"; // Import Menu component
-import MenuItem from "@mui/material/MenuItem"; // Import MenuItem component
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import AdbIcon from "@mui/icons-material/Adb";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Menu,
+  MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Container,
+  Button,
+  IconButton,
+} from "@mui/material";
 import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { FlagIcon } from "react-flag-icon-css"; // Import FlagIcon from react-flag-icon-css
-import CountryFlag from "react-country-flag"; // Import CountryFlag from react-country-flag
+import CountryFlag from "react-country-flag";
 
 const languages = [
-  { code: "en", label: "English", country: "US" }, // Example: US flag for English
-  { code: "fr", label: "French", country: "FR" }, // Example: FR flag for French
-  { code: "es", label: "Spanish", country: "ES" }, // Example: ES flag for Spanish
-  { code: "de", label: "German", country: "DE" }, // Example: DE flag for German
-  { code: "it", label: "Italian", country: "IT" }, // Example: IT flag for Italian
-  // Add more languages as needed
+  { code: "en", label: "English", country: "US" },
+  { code: "fr", label: "French", country: "FR" },
+  { code: "es", label: "Spanish", country: "ES" },
+  { code: "de", label: "German", country: "DE" },
+  { code: "it", label: "Italian", country: "IT" },
 ];
 
 const pages = [
@@ -27,188 +32,196 @@ const pages = [
   { label: "Breed", path: "/breed" },
   { label: "Future Litters", path: "/puppies" },
   { label: "Contact Us", path: "/contact" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Parent Dogs", path: "/parent-dogs" },
+  { label: "Resources", path: "/resources" },
+  { label: "News", path: "/news" },
 ];
 
 function ResponsiveAppBar() {
-  const [anchorElMenu, setAnchorElMenu] = React.useState(null); // Define state for main menu
-  const [anchorElLanguage, setAnchorElLanguage] = React.useState(null); // Define state for language dropdown
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const [languageMenuAnchorEl, setLanguageMenuAnchorEl] = useState(null);
   const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
 
-  const handleMenuOpen = (event) => {
-    setAnchorElMenu(event.currentTarget);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handleMenuClick = (event) => {
+    setMenuAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
-    setAnchorElMenu(null);
+    setMenuAnchorEl(null);
   };
 
-  const handleLanguageMenuOpen = (event) => {
-    setAnchorElLanguage(event.currentTarget);
+  const handleLanguageMenuClick = (event) => {
+    setLanguageMenuAnchorEl(event.currentTarget);
   };
 
   const handleLanguageMenuClose = () => {
-    setAnchorElLanguage(null);
+    setLanguageMenuAnchorEl(null);
   };
 
+  const handleLanguageChange = (language) => {
+    setCurrentLanguage(language);
+    handleLanguageMenuClose();
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        LOGO
+      </Typography>
+      <List>
+        {pages.map((page) => (
+          <ListItem button key={page.label} component={Link} to={page.path}>
+            <ListItemText primary={page.label} />
+          </ListItem>
+        ))}
+        <ListItem button onClick={handleLanguageMenuClick}>
+          <CountryFlag
+            countryCode={currentLanguage.country}
+            svg
+            style={{ width: "20px", height: "auto" }}
+          />
+          <ListItemText primary={currentLanguage.label} />
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#212529" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "#212529" }}>
+        <Container maxWidth="xl">
+          <Toolbar
+            disableGutters
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            LOGO
-          </Typography>
-
-          {pages.map((page) => (
-            <Button
-              key={page.label}
-              component={Link}
-              to={page.path}
-              sx={{ mx: 1, color: "inherit" }}
-            >
-              {page.label}
-            </Button>
-          ))}
-
-          {/* Main menu */}
-          <Box sx={{ position: "relative" }}>
-            <Button
-              aria-controls={anchorElMenu ? "menu-appbar" : undefined}
-              aria-haspopup="true"
-              onClick={handleMenuOpen}
-              color="inherit"
+            <Box
               sx={{
-                mx: 1,
-                color: "inherit",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "flex-end",
+                flexGrow: 0,
               }}
             >
-              More
-              <ArrowDropDownIcon />
-            </Button>
-
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElMenu}
-              open={Boolean(anchorElMenu)}
-              onClose={handleMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              {/* Main menu items */}
-              <MenuItem
-                onClick={handleMenuClose}
-                component={Link}
-                to="/gallery"
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: "none" } }}
               >
-                Gallery
-              </MenuItem>
-              <MenuItem
-                onClick={handleMenuClose}
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                noWrap
                 component={Link}
-                to="/parent-dogs"
+                to="/"
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  justifyContent: { xs: "center", sm: "flex-start" }, // Centers the logo on xs and aligns to start on sm and above
+                  color: "inherit",
+                  textDecoration: "none",
+                  marginRight: 2,
+                }}
               >
-                Parent Dogs
-              </MenuItem>
-              <MenuItem
-                onClick={handleMenuClose}
-                component={Link}
-                to="/resources"
+                LOGO
+              </Typography>
+              <Box
+                sx={{
+                  display: { xs: "none", sm: "flex" },
+                  flexGrow: 1,
+                  justifyContent: "flex-end",
+                }}
               >
-                Resources
-              </MenuItem>
-              <MenuItem onClick={handleMenuClose} component={Link} to="/news">
-                News
-              </MenuItem>
-            </Menu>
-          </Box>
-          <Box sx={{ flexGrow: 1 }} />
-
-          {/* Language selection */}
-          <Box sx={{ position: "relative" }}>
-            <Button
-              aria-controls={anchorElLanguage ? "menu-language" : undefined}
-              aria-haspopup="true"
-              onClick={handleLanguageMenuOpen}
-              color="inherit"
-              sx={{
-                mx: 1,
-                color: "inherit",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <CountryFlag
-                countryCode={currentLanguage.country}
-                svg
-                style={{ width: "30px", height: "auto", borderRadius: "50%" }}
-              />
-              <Typography sx={{ ml: 1 }}>{currentLanguage.label}</Typography>
-              <ArrowDropDownIcon />
-            </Button>
-
-            <Menu
-              id="menu-language"
-              anchorEl={anchorElLanguage}
-              open={Boolean(anchorElLanguage)}
-              onClose={handleLanguageMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-            >
-              {/* Language menu items */}
-              {languages
-                .filter((language) => language.code !== currentLanguage.code) // Filter out the current language
-                .map((language) => (
+                {pages.slice(0, 4).map((page) => (
+                  <Button
+                    key={page.label}
+                    sx={{ color: "white" }}
+                    component={Link}
+                    to={page.path}
+                  >
+                    {page.label}
+                  </Button>
+                ))}
+                <Button sx={{ color: "white" }} onClick={handleMenuClick}>
+                  More <ArrowDropDownIcon />
+                </Button>
+                <Menu
+                  anchorEl={menuAnchorEl}
+                  keepMounted
+                  open={Boolean(menuAnchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  {pages.slice(4).map((page) => (
+                    <MenuItem
+                      key={page.label}
+                      onClick={handleMenuClose}
+                      component={Link}
+                      to={page.path}
+                    >
+                      {page.label}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            </Box>
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              <Button sx={{ color: "white" }} onClick={handleLanguageMenuClick}>
+                <CountryFlag
+                  countryCode={currentLanguage.country}
+                  svg
+                  style={{ width: "20px", height: "auto" }}
+                />
+                {currentLanguage.label} <ArrowDropDownIcon />
+              </Button>
+              <Menu
+                anchorEl={languageMenuAnchorEl}
+                keepMounted
+                open={Boolean(languageMenuAnchorEl)}
+                onClose={handleLanguageMenuClose}
+              >
+                {languages.map((language) => (
                   <MenuItem
                     key={language.code}
-                    onClick={() => {
-                      setCurrentLanguage(language);
-                      handleLanguageMenuClose(); // Close the language dropdown after selection
-                    }}
+                    onClick={() => handleLanguageChange(language)}
                   >
                     <CountryFlag
                       countryCode={language.country}
                       svg
-                      style={{
-                        width: "30px",
-                        height: "auto",
-                        borderRadius: "50%",
-                      }}
+                      style={{ width: "20px", height: "auto" }}
                     />
-                    <Typography sx={{ ml: 1 }}>{language.label}</Typography>
+                    {language.label}
                   </MenuItem>
                 ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }} // Better open performance on mobile.
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 }
 
