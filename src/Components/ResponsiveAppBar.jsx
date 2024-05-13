@@ -10,8 +10,18 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const pages = ['About Us', 'Breed', 'Future Litters', 'Contact Us', 'Gallery', 'Parent Dogs', 'Resources', 'News'];
+const pages = [
+  { label: 'About Us', path: '/about-us' },
+  { label: 'Breed', path: '/breed' },
+  { label: 'Future Litters', path: '/puppies' },
+  { label: 'Contact Us', path: '/contact' },
+  { label: 'Gallery', path: '/gallery' },
+  { label: 'Parent Dogs', path: '/parent-dogs' },
+  { label: 'Resources', path: '/resources' },
+  { label: 'News', path: '/news' }
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,15 +43,15 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#212529' }}> {/* Change backgroundColor here */}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            to="/" // Change to the home page
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -85,8 +95,8 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu} component={Link} to={page.path}>
+                  <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -113,16 +123,17 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
+                component={Link}
+                to={page.path}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.label}
               </Button>
             ))}
           </Box>
 
-         
         </Toolbar>
       </Container>
     </AppBar>
