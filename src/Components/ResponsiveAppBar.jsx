@@ -191,19 +191,21 @@ function ResponsiveAppBar() {
                 open={Boolean(languageMenuAnchorEl)}
                 onClose={handleLanguageMenuClose}
               >
-                {languages.map((language) => (
-                  <MenuItem
-                    key={language.code}
-                    onClick={() => handleLanguageChange(language)}
-                  >
-                    <CountryFlag
-                      countryCode={language.country}
-                      svg
-                      style={{ width: "20px", height: "auto" }}
-                    />
-                    {language.label}
-                  </MenuItem>
-                ))}
+                {languages
+                  .filter((lang) => lang.code !== currentLanguage.code)
+                  .map((language) => (
+                    <MenuItem
+                      key={language.code}
+                      onClick={() => handleLanguageChange(language)}
+                    >
+                      <CountryFlag
+                        countryCode={language.country}
+                        svg
+                        style={{ width: "20px", height: "auto" }}
+                      />
+                      {language.label}
+                    </MenuItem>
+                  ))}
               </Menu>
             </Box>
           </Toolbar>
