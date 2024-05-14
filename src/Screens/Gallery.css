@@ -1,0 +1,19 @@
+
+.imagelist {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if necessary */
+    width: 100%; /* Ensure it takes full width of its parent */
+    height: 80vh;
+    padding: 20px; /* Optional: Adds some space inside the container */
+  }
+
+  .top {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if necessary */
+    width: 100%; /* Ensure it takes full width of its parent */
+    height: 10vh;
+    padding-top: 50px; /* Optional: Adds some space inside the container */
+  }
+  

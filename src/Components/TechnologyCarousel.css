@@ -1,0 +1,7 @@
+.carousel-container {
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 20px;
+    overflow: hidden; /* Ensures content does not flow outside the rounded corners */
+}
