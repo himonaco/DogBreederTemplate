@@ -20,7 +20,7 @@ function HomePage() {
         <ActionAreaCard className="card" />
       </div>
       <div className="aboutus">
-        <h1 className="aboutus-title">About Us</h1>
+        <h1 className="aboutus-title">About not Us</h1>
         <h4 className="aboutus-content">
             Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
             labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
