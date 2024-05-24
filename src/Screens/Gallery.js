@@ -2,6 +2,7 @@ import React from 'react'
 import ResponsiveAppBar from '../Components/ResponsiveAppBar';
 import MyFooter from '../Components/MyFooter';
 import TitlebarBelowMasonryImageList from '../Components/TitlebarBelowMasonryImageList';
+import ScrollTopButton from '../Components/ScrollTopButton';
 import './Gallery.css'
 
 export default function Gallery() {
@@ -27,6 +28,7 @@ export default function Gallery() {
         </div>
       </div>
       <MyFooter />
+      <ScrollTopButton />
     </div>
   )
 }

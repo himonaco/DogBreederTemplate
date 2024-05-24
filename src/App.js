@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./Screens/HomePage";
-import AboutUs from "./Screens/AboutUs";
 import Breed from "./Screens/Breed";
 import ContactUs from "./Screens/ContactUs";
 import Gallery from "./Screens/Gallery";
@@ -16,7 +15,6 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/breed" element={<Breed />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/gallery" element={<Gallery />} />

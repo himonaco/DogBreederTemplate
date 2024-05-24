@@ -28,14 +28,13 @@ const languages = [
 ];
 
 const pages = [
-  { label: "About Us", path: "/about-us" },
+  { label: "Home", path: "/" },
   { label: "Breed", path: "/breed" },
-  { label: "Future Litters", path: "/puppies" },
+  { label: "Litters", path: "/puppies" },
   { label: "Contact Us", path: "/contact" },
   { label: "Gallery", path: "/gallery" },
   { label: "Parent Dogs", path: "/parent-dogs" },
   { label: "Resources", path: "/resources" },
-  { label: "News", path: "/news" },
 ];
 
 function ResponsiveAppBar() {

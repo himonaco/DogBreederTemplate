@@ -1,0 +1,17 @@
+.content {
+    gap: 10px; /* Adds some space between the columns */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+.info {
+  max-width: 75%;
+  margin: 40px auto;
+}
+
+.form-container{
+  /* display: flex; */
+  
+}
