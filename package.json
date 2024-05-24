@@ -1,6 +1,6 @@
 {
   "name": "dogbreeder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "@coreui/react": "^5.0.0",
     "@emotion/react": "^11.11.4",
@@ -39,6 +39,11 @@
       ">0.2%",
       "not dead",
       "not op_mini all"
+    ],
+    "files": [
+      "src",
+      "public",
+      "README.md"
     ],
     "development": [
       "last 1 chrome version",
