@@ -1,6 +1,6 @@
 {
   "name": "dogbreeder",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "dependencies": {
     "@coreui/react": "^5.0.0",
     "@emotion/react": "^11.11.4",
