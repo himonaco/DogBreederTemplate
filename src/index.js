@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+export { default as HomePage } from './pages/HomePage';
+export { default as Breed } from './pages/Breed';
+export { default as ContactUs } from './pages/ContactUs';
+export { default as Gallery } from './pages/Gallery';
+export { default as ParentDogs } from './pages/ParentDogs';
+export { default as Puppies } from './pages/Puppies';
+export { default as Resources } from './pages/Resources';
+export { default as News } from './pages/News';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
